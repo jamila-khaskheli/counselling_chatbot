@@ -1083,3 +1083,136 @@ div.stButton > button:not([kind="primary"]):hover {
     .counsellor-features { gap: 0.5rem; }
     .feature-pill { font-size: 0.78rem; padding: 0.3rem 0.7rem; }
 }
+
+/* ==========================================================================
+   9. TEXT COLOR HARDENING
+   Forces readable text regardless of Streamlit theme auto-detection.
+   Without these, dark-mode phones get light text on the forced-white background.
+   ========================================================================== */
+
+/* Hero heading — force dark ink; only .accent gets transparent fill */
+.hero-title {
+    color: var(--c-ink) !important;
+    -webkit-text-fill-color: var(--c-ink) !important;
+}
+.hero-title .accent {
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Section + page headings */
+.section-title, .page-title {
+    color: var(--c-ink) !important;
+}
+.section-sub, .page-sub, .hero-subtitle {
+    color: var(--c-slate-600) !important;
+}
+.section-eyebrow, .page-eyebrow, .quote-band-title {
+    color: var(--c-teal-700) !important;
+}
+
+/* Checkbox labels (test items) — broadened selectors to catch all label elements */
+[data-testid="stCheckbox"] label,
+[data-testid="stCheckbox"] label span,
+[data-testid="stCheckbox"] label p,
+[data-testid="stCheckbox"] label div {
+    color: var(--c-slate-700) !important;
+}
+
+/* Expander/FAQ text */
+[data-testid="stExpander"] [data-testid="stExpanderDetails"],
+[data-testid="stExpander"] [data-testid="stExpanderDetails"] p,
+[data-testid="stExpander"] [data-testid="stExpanderDetails"] div,
+[data-testid="stExpander"] [data-testid="stExpanderDetails"] span {
+    color: var(--c-slate-700) !important;
+}
+
+/* General Streamlit markdown/text — catch anything Streamlit renders */
+[data-testid="stMarkdown"] p,
+[data-testid="stMarkdown"] li,
+[data-testid="stMarkdown"] span {
+    color: var(--c-ink);
+}
+
+/* Form input labels */
+[data-testid="stTextInput"] label,
+[data-testid="stSelectbox"] label,
+[data-testid="stTextArea"] label,
+[data-testid="stRadio"] label {
+    color: var(--c-slate-700) !important;
+}
+
+/* Caption text */
+[data-testid="stCaptionContainer"] {
+    color: var(--c-slate-500) !important;
+}
+
+
+/* ==========================================================================
+   10. COMPREHENSIVE MOBILE RESPONSIVE
+   Consolidates all mobile fixes in one block.
+   ========================================================================== */
+@media (max-width: 640px) {
+
+    /* ---- Layout ---- */
+    .page-wrap, .page-wrap-chat {
+        max-width: 100% !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    .page-wrap-chat { padding-bottom: 6rem; }
+
+    .section {
+        padding: 2.5rem 1rem !important;
+    }
+
+    /* ---- Hero ---- */
+    .hero { padding: 1.5rem 0.75rem 0 !important; }
+    .hero-title { font-size: 2rem !important; }
+
+    /* ---- Navigation ---- */
+    .topbar, .navbar {
+        padding: 0.75rem 1rem !important;
+    }
+
+    /* ---- Profile card (chat page) ---- */
+    .profile-card { padding: 1.25rem !important; margin-bottom: 1.25rem; }
+    .profile-card-name { font-size: 1.25rem !important; }
+    .profile-card-code { font-size: 1.5rem !important; }
+
+    /* ---- Chat ---- */
+    .chat-avatar { width: 30px; height: 30px; font-size: 0.75rem; }
+    .chat-row { gap: 0.5rem; }
+    .feedback-row-wrap { margin-left: 2.25rem; }
+
+    /* ---- Test page ---- */
+    .question-form { padding: 1.25rem 1rem 1rem !important; }
+    .info-card { padding: 1.25rem !important; }
+    .code-reveal { padding: 1.5rem 1rem !important; }
+    .code-reveal-letters { font-size: 3.5rem !important; }
+    .type-card { flex-direction: column !important; gap: 0.75rem; }
+    .pathways-card { padding: 1.25rem !important; }
+
+    /* ---- Landing page ---- */
+    .final-cta { padding: 1.5rem 1.25rem 1rem !important; border-radius: var(--r-lg) !important; }
+    .final-cta h2 { font-size: 1.75rem !important; }
+    .step-desc { max-width: 100% !important; }
+    .counsellor-preview { padding: 1.25rem 1rem !important; }
+
+    /* ---- Buttons — slightly tighter on mobile ---- */
+    div.stButton > button[kind="primary"] {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    div.stButton > button:not([kind="primary"]) {
+        padding: 0.7rem 1.25rem !important;
+        font-size: 0.9375rem !important;
+    }
+    .st-key-starters_grid div.stButton > button {
+        font-size: 0.85rem !important;
+        padding: 0.6rem 0.875rem !important;
+    }
+
+    /* ---- Empty state (no test taken) ---- */
+    .empty-state { padding: 2.5rem 1rem !important; }
+    .empty-state h1 { font-size: 1.5rem !important; }
+}
