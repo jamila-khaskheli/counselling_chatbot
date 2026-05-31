@@ -7,12 +7,13 @@ langchain
 langchain-community
 langchain-openai
 langchain-huggingface
-chromadb
+chromadb==0.5.23
 sentence-transformers
 openai
 torchvision
-langchain-chroma
+langchain-chroma==0.1.4
 langchain_core
+
 
 # Document loaders
 pypdf
