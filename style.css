@@ -1,0 +1,1085 @@
+/* ==========================================================================
+   TCF Rahnuma — Single stylesheet
+   Shared across Home.py, the RIASEC test, and the AI counsellor chat.
+
+   Contents
+   --------
+   1.  Design tokens (CSS variables)
+   2.  Fonts, Streamlit chrome, base typography
+   3.  Shared components
+       - Buttons (primary / secondary / feedback / starter chips)
+       - Section + page headings
+       - Page wrappers
+       - Notices
+       - Streamlit widgets (expander, checkbox, sidebar, chat input)
+   4.  Navigation (landing navbar + interior topbar)
+   5.  Landing page
+   6.  Test page
+   7.  Counsellor chat page
+   8.  Shared chat bubbles (landing preview + live chat)
+
+   Notes for the Python side (so this CSS applies cleanly):
+   - Landing CTAs should use st.button(..., type="primary") so they pick up
+     the gradient. Without type="primary" they render as outline buttons.
+   - The chat page wrapper should be <div class="page-wrap page-wrap-chat">.
+   - The info form (test step 2) should use <div class="info-card"> as wrapper.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
+:root {
+    /* Brand teals */
+    --c-teal-700: #0F766E;   /* primary brand */
+    --c-teal-500: #14B8A6;
+    --c-teal-300: #5EEAD4;
+    --c-teal-200: #99F6E4;
+    --c-teal-100: #CCFBF1;
+    --c-teal-50:  #F0FDFA;
+
+    /* Accent (cyan/blue used in reveal + hero accent) */
+    --c-cyan-600: #0891B2;
+    --c-blue-800: #1E40AF;
+    --c-blue-500: #3B82F6;
+    --c-emerald:  #10B981;
+
+    /* Ink + slate scale */
+    --c-ink:       #0F172A;
+    --c-slate-700: #334155;
+    --c-slate-600: #475569;
+    --c-slate-500: #64748B;
+    --c-slate-400: #94A3B8;
+    --c-slate-300: #CBD5E1;
+    --c-slate-200: #E2E8F0;
+    --c-slate-100: #F1F5F9;
+    --c-slate-50:  #F8FAFC;
+
+    /* Gradients */
+    --grad-brand:  linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);
+    --grad-reveal: linear-gradient(135deg, #0F766E 0%, #0891B2 55%, #1E40AF 100%);
+    --grad-accent: linear-gradient(90deg, #10B981 0%, #3B82F6 100%);
+
+    /* Shadows */
+    --shadow-card:   0 4px 12px -6px rgba(15, 23, 42, 0.05);
+    --shadow-hover:  0 14px 28px -12px rgba(15, 23, 42, 0.10);
+    --shadow-button: 0 12px 28px -10px rgba(15, 118, 110, 0.50);
+    --shadow-reveal: 0 24px 50px -18px rgba(15, 118, 110, 0.45);
+
+    /* Radii */
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+    --r-pill: 999px;
+}
+
+
+/* ==========================================================================
+   2. FONTS, STREAMLIT CHROME, BASE TYPOGRAPHY
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif&display=swap');
+
+/* Hide Streamlit default chrome */
+#MainMenu,
+footer,
+header,
+.stDeployButton { visibility: hidden !important; height: 0 !important; }
+[data-testid="stToolbar"] { display: none; }
+[data-testid="stSidebarCollapsedControl"] { display: none; }
+
+/* Container reset */
+.main .block-container {
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+.stApp { background: #FFFFFF; }
+
+/* Base typography */
+html, body, [class*="css"] {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--c-ink);
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   3. SHARED COMPONENTS
+   ========================================================================== */
+
+/* ---- Buttons -------------------------------------------------------------
+   Primary  = gradient (main CTAs, "Continue", "See results", "Talk to AI")
+   Secondary = white outline (Back, Retake, sidebar actions)
+   Two narrowly-scoped exceptions follow: feedback buttons and starter chips.
+--------------------------------------------------------------------------- */
+div.stButton > button[kind="primary"],
+div.stForm button[kind="primaryFormSubmit"] {
+    background: var(--grad-brand) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.9rem 2rem !important;
+    font-size: 1.0625rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--r-md) !important;
+    box-shadow: var(--shadow-button) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+div.stButton > button[kind="primary"]:hover,
+div.stForm button[kind="primaryFormSubmit"]:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 16px 32px -10px rgba(15, 118, 110, 0.6) !important;
+}
+div.stButton > button[kind="primary"]:active { transform: translateY(0) !important; }
+
+div.stButton > button:not([kind="primary"]),
+div.stForm button[kind="secondaryFormSubmit"] {
+    background: white !important;
+    color: var(--c-teal-700) !important;
+    border: 1.5px solid var(--c-teal-500) !important;
+    padding: 0.85rem 1.75rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--r-md) !important;
+    transition: background 0.15s ease !important;
+}
+div.stButton > button:not([kind="primary"]):hover {
+    background: var(--c-teal-50) !important;
+}
+
+/* ---- Section + page headings -------------------------------------------- */
+/* Landing uses .section-* ; interior pages use .page-* */
+.section-eyebrow {
+    text-align: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--c-teal-700);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.section-title {
+    text-align: center;
+    font-size: 2.375rem;
+    font-weight: 800;
+    margin: 0 0 0.875rem;
+    color: var(--c-ink);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+}
+.section-sub {
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--c-slate-500);
+    margin: 0 auto 0.5rem;
+    line-height: 1.6;
+}
+.section-sub strong { color: var(--c-ink); font-weight: 600; }
+
+.page-eyebrow {
+    text-align: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--c-teal-700);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+.page-title {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem;
+    color: var(--c-ink);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+}
+.page-sub {
+    text-align: center;
+    font-size: 1.0625rem;
+    color: var(--c-slate-500);
+    margin: 0 auto 2.5rem;
+    line-height: 1.55;
+}
+
+/* ---- Page wrappers ------------------------------------------------------- */
+.section {
+    padding: 4.5rem 2rem;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.section-tinted {
+    background: var(--c-slate-50);
+    padding: 1rem;
+    margin: 0;
+}
+.section-tinted-inner { max-width: 1180px; margin: 0; }
+
+.page-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+}
+.page-wrap-wide { max-width: 1100px; }
+/* Chat page: narrower + extra bottom space for the sticky chat input */
+.page-wrap-chat {
+    max-width: 820px;
+    padding-bottom: 8rem;
+}
+
+/* ---- Notices ------------------------------------------------------------- */
+.notice {
+    border-radius: var(--r-md);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+}
+.notice-info {
+    background: #EFF6FF;
+    border-left: 3px solid var(--c-blue-500);
+    color: var(--c-blue-800);
+}
+.notice-warn {
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    color: #92400E;
+}
+
+/* ---- Streamlit widgets --------------------------------------------------- */
+
+/* Expander (FAQ) */
+[data-testid="stExpander"] {
+    border: 1px solid var(--c-slate-200) !important;
+    border-radius: var(--r-md) !important;
+    margin-bottom: 0.75rem !important;
+    background: white !important;
+    box-shadow: none !important;
+}
+[data-testid="stExpander"] summary {
+    font-weight: 600 !important;
+    color: var(--c-ink) !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 0.9875rem !important;
+}
+[data-testid="stExpander"] summary:hover { background: var(--c-slate-50) !important; }
+
+/* Checkboxes (test questions) */
+[data-testid="stCheckbox"] {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: 10px;
+    padding: 0.75rem 0.875rem;
+    margin-bottom: 0.5rem !important;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+[data-testid="stCheckbox"]:hover {
+    border-color: var(--c-teal-300);
+    background: var(--c-teal-50);
+}
+[data-testid="stCheckbox"] label {
+    font-size: 0.9375rem !important;
+    color: var(--c-slate-700) !important;
+    line-height: 1.4 !important;
+}
+[data-testid="stCheckbox"] label p { margin: 0 !important; }
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: var(--c-slate-50);
+    border-right: 1px solid var(--c-slate-200);
+}
+[data-testid="stSidebar"] h3 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--c-teal-700);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Chat input (sticks to bottom of chat page) */
+[data-testid="stChatInput"] {
+    border-top: 1px solid var(--c-slate-200);
+    background: white;
+}
+[data-testid="stChatInput"] textarea { font-size: 0.95rem !important; }
+
+
+/* ==========================================================================
+   4. NAVIGATION
+   ========================================================================== */
+
+/* Landing navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--c-slate-200);
+}
+.navbar-brand {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-weight: 700; font-size: 1.0625rem; color: var(--c-teal-700);
+}
+.navbar-brand-icon {
+    width: 34px; height: 34px;
+    background: var(--grad-brand);
+    border-radius: var(--r-sm);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 1rem;
+}
+.navbar-links { display: flex; gap: 1.75rem; font-size: 0.925rem; }
+.navbar-links a { color: var(--c-slate-600); text-decoration: none; font-weight: 500; }
+.navbar-links a:hover { color: var(--c-teal-700); }
+@media (max-width: 720px) { .navbar-links { display: none; } }
+
+/* Interior topbar (test + chat) */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2rem;
+    background: white;
+    border-bottom: 1px solid var(--c-slate-200);
+}
+.topbar-brand {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-weight: 700; font-size: 1.0625rem; color: var(--c-teal-700);
+}
+.topbar-brand-icon {
+    width: 34px; height: 34px;
+    background: var(--grad-brand);
+    border-radius: var(--r-sm);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 1rem;
+}
+.topbar-back {
+    font-size: 0.875rem;
+    color: var(--c-slate-600);
+    text-decoration: none;
+    font-weight: 500;
+}
+.topbar-back:hover { color: var(--c-teal-700); }
+
+
+/* ==========================================================================
+   5. LANDING PAGE
+   ========================================================================== */
+
+/* ---- Hero ---- */
+.hero {
+    background:
+        radial-gradient(60% 80% at 50% 0%, var(--c-teal-100) 0%, transparent 65%),
+        linear-gradient(180deg, var(--c-teal-50) 0%, #FFFFFF 100%);
+    padding: 2rem 0 0;
+    text-align: center;
+}
+.hero-badge {
+    display: inline-block;
+    background: #ffffff;
+    color: #047857;
+    padding: 6px 14px;
+    border-radius: var(--r-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #D1FAE5;
+    margin-bottom: 1.25rem;
+}
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--c-ink);
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+}
+.hero-title .accent {
+    background: var(--grad-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--c-slate-600);
+    line-height: 1.65;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+.hero-trust {
+    display: flex; justify-content: center; gap: 1.75rem;
+    color: var(--c-slate-500); font-size: 0.875rem;
+    margin-top: 1.75rem; flex-wrap: wrap;
+}
+.hero-trust span { display: flex; align-items: center; gap: 0.4rem; }
+.hero-trust strong { color: var(--c-ink); font-weight: 600; }
+@media (max-width: 640px) {
+    .hero-title { font-size: 2.25rem; }
+    .hero-subtitle { font-size: 1rem; }
+}
+
+/* ---- Quote band ---- */
+.quote-band {
+    background: white;
+    padding: 3.5rem 2rem;
+    border-top: 1px solid var(--c-slate-100);
+    border-bottom: 1px solid var(--c-slate-100);
+}
+.quote-band-title {
+    text-align: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--c-teal-700);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+.quote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.quote-card {
+    padding: 1.5rem 1.5rem 1.25rem;
+    background: var(--c-slate-50);
+    border-radius: var(--r-md);
+    border-left: 3px solid var(--c-teal-500);
+}
+.quote-card-text {
+    font-size: 0.95rem;
+    color: var(--c-slate-700);
+    margin: 0 0 0.75rem;
+    line-height: 1.55;
+}
+.quote-card-author {
+    font-size: 0.8125rem;
+    color: var(--c-slate-500);
+    font-weight: 500;
+}
+.quote-band-closer {
+    text-align: center;
+    margin: 2.25rem auto 0;
+    color: var(--c-slate-600);
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .quote-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- RIASEC cards ----
+   Reusable card system. Home.py currently inlines these styles; it can be
+   simplified to use .riasec-card / .riasec-letter / etc. instead. ---- */
+.riasec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+.riasec-card {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.riasec-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--c-teal-300);
+}
+.riasec-letter {
+    display: flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px;
+    background: var(--grad-brand);
+    color: white;
+    border-radius: 11px;
+    font-weight: 800; font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+.riasec-name { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--c-ink); }
+.riasec-desc { font-size: 0.9375rem; color: var(--c-slate-600); margin: 0 0 0.875rem; line-height: 1.55; }
+.riasec-careers {
+    font-size: 0.8125rem;
+    color: var(--c-teal-700);
+    font-weight: 600;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--c-slate-100);
+}
+@media (max-width: 900px) { .riasec-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .riasec-grid { grid-template-columns: 1fr; } }
+
+/* ---- Step cards (How it works) ---- */
+.step-card {
+    background: #ffffff;
+    border: 1px solid var(--c-slate-200);
+    border-radius: var(--r-lg);
+    padding: 1.75rem;
+    height: 100%;
+    position: relative;
+    transition: all 0.25s ease;
+}
+.step-card:hover {
+    border-color: #93C5FD;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+.step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--c-teal-500);
+    color: var(--c-teal-700);
+    font-weight: 800; font-size: 1.375rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+}
+.step-title { font-size: 1.125rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--c-ink); }
+.step-desc { font-size: 0.9375rem; color: var(--c-slate-500); line-height: 1.55; max-width: 260px; margin: 0 auto; }
+
+/* ---- Stats band (defined for stats(); currently optional) ---- */
+.stats-band { background: var(--c-ink); color: white; padding: 3.5rem 2rem; }
+.stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; text-align: center;
+}
+.stat-num {
+    font-size: 2.625rem; font-weight: 800;
+    color: var(--c-teal-300);
+    letter-spacing: -0.025em;
+    margin: 0 0 0.4rem;
+    line-height: 1;
+}
+.stat-label { font-size: 0.9rem; color: var(--c-slate-300); line-height: 1.4; }
+@media (max-width: 768px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
+}
+
+/* ---- Testimonials (defined for testimonials(); currently optional) ---- */
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.testimonial-card {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: 14px;
+    padding: 1.75rem;
+    display: flex; flex-direction: column;
+}
+.testimonial-quote { font-size: 0.975rem; color: var(--c-slate-700); line-height: 1.6; margin: 0 0 1.25rem; flex: 1; }
+.testimonial-author {
+    display: flex; align-items: center; gap: 0.875rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-slate-100);
+}
+.testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--grad-brand);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9375rem;
+}
+.testimonial-meta { line-height: 1.3; }
+.testimonial-name { font-weight: 600; color: var(--c-ink); font-size: 0.9375rem; }
+.testimonial-role { font-size: 0.8125rem; color: var(--c-slate-500); margin-top: 0.125rem; }
+@media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+/* ---- Counsellor preview (landing) ---- */
+.counsellor-preview {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: 18px;
+    padding: 2rem 1.75rem;
+    max-width: 760px;
+    margin: 0 auto;
+    box-shadow: 0 12px 30px -14px rgba(15, 23, 42, 0.08);
+}
+.counsellor-features {
+    display: flex;
+    justify-content: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--c-slate-100);
+}
+.feature-pill {
+    background: var(--c-teal-50);
+    color: var(--c-teal-700);
+    border: 1px solid var(--c-teal-200);
+    padding: 0.35rem 0.875rem;
+    border-radius: var(--r-pill);
+    font-size: 0.825rem;
+    font-weight: 500;
+}
+
+/* ---- Final CTA ---- */
+.final-cta {
+    margin: 0.5rem auto 1rem;
+    background: var(--grad-reveal);
+    border-radius: var(--r-xl);
+    padding: 1.75rem 2rem 1.25rem;
+    text-align: center;
+    color: white;
+    max-width: 1100px;
+    box-shadow: var(--shadow-reveal);
+}
+.final-cta h2 {
+    font-size: 2.25rem; font-weight: 800;
+    margin: 0 0 1rem; letter-spacing: -0.025em;
+    line-height: 1.15;
+}
+.final-cta p {
+    font-size: 1.125rem; opacity: 0.95;
+    margin: 0 auto 2rem; max-width: 580px;
+    line-height: 1.55;
+}
+.final-cta-footer {
+    text-align: center; color: var(--c-slate-500);
+    font-size: 0.875rem; margin: 1rem 0 4rem;
+}
+
+/* ---- Footer (full version, if .footer markup is used) ---- */
+.footer {
+    background: var(--c-ink); color: var(--c-slate-300);
+    padding: 3.5rem 2rem 2rem;
+    font-size: 0.9rem;
+}
+.footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+}
+.footer h4 { color: white; font-size: 0.95rem; margin: 0 0 1rem; font-weight: 600; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer li { margin-bottom: 0.55rem; }
+.footer a { color: var(--c-slate-300); text-decoration: none; }
+.footer a:hover { color: var(--c-teal-300); }
+.footer-blurb { margin: 0; line-height: 1.65; color: var(--c-slate-400); }
+.footer-brand {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-weight: 700; font-size: 1.0625rem; color: white;
+    margin-bottom: 1rem;
+}
+.footer-bottom {
+    max-width: 1100px; margin: 2.5rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1E293B;
+    text-align: center; color: var(--c-slate-500);
+    font-size: 0.8125rem;
+}
+.footer-note {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--c-slate-400);
+    font-size: 0.8125rem;
+}
+@media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+
+/* ==========================================================================
+   6. TEST PAGE
+   ========================================================================== */
+
+/* ---- Step indicator ---- */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto 2.5rem;
+    max-width: 480px;
+}
+.step-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border: 2px solid var(--c-slate-200);
+    background: white;
+    color: var(--c-slate-400);
+    flex-shrink: 0;
+}
+.step-dot.active {
+    border-color: var(--c-teal-700);
+    background: var(--grad-brand);
+    color: white;
+    box-shadow: 0 4px 14px -4px rgba(15, 118, 110, 0.4);
+}
+.step-dot.complete {
+    border-color: var(--c-teal-700);
+    background: var(--c-teal-700);
+    color: white;
+}
+.step-line { flex: 1; height: 2px; background: var(--c-slate-200); max-width: 80px; }
+.step-line.complete { background: var(--c-teal-700); }
+.step-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 480px;
+    margin: 0.75rem auto 0;
+    font-size: 0.8125rem;
+    color: var(--c-slate-500);
+    font-weight: 500;
+}
+.step-label.active { color: var(--c-teal-700); font-weight: 600; }
+
+/* ---- Question form ---- */
+.question-form {
+    background: var(--c-slate-50);
+    border: 1px solid var(--c-slate-200);
+    border-radius: var(--r-lg);
+    padding: 2rem 1.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+.question-form-helper {
+    text-align: center;
+    font-size: 0.925rem;
+    color: var(--c-slate-500);
+    margin-bottom: 1.5rem;
+}
+.question-form-helper strong { color: var(--c-ink); font-weight: 600; }
+
+/* ---- Info form ---- */
+.info-card {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: var(--r-lg);
+    padding: 2rem;
+    max-width: 560px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-card);
+}
+.info-card h3 { font-size: 1.25rem; margin: 0 0 0.5rem; color: var(--c-ink); }
+
+/* ---- Holland code reveal ---- */
+.code-reveal {
+    text-align: center;
+    background: var(--grad-reveal);
+    border-radius: var(--r-xl);
+    padding: 2rem;
+    color: white;
+    box-shadow: var(--shadow-reveal);
+    margin-bottom: 2.5rem;
+}
+.code-reveal-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+}
+.code-reveal-letters {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 6rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.875rem;
+    font-weight: 400;
+}
+.code-reveal-names { font-size: 1.125rem; opacity: 0.95; font-weight: 500; }
+.code-reveal-names span { opacity: 0.6; margin: 0 0.5rem; }
+@media (max-width: 600px) {
+    .code-reveal-letters { font-size: 4.25rem; }
+    .code-reveal-names { font-size: 1rem; }
+}
+
+/* ---- Result sections ---- */
+.result-section-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--c-ink);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.015em;
+}
+
+/* Type interpretation cards */
+.type-card {
+    background: white;
+    border: 1px solid var(--c-slate-200);
+    border-radius: 14px;
+    padding: 1.5rem 1.5rem 1.25rem;
+    margin-bottom: 0.875rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+.type-card-letter {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    background: var(--grad-brand);
+    color: white;
+    border-radius: var(--r-md);
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+}
+.type-card-body { flex: 1; }
+.type-card-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+.type-card-name { font-weight: 700; font-size: 1.0625rem; color: var(--c-ink); }
+.type-card-score {
+    font-size: 0.8125rem;
+    color: var(--c-teal-700);
+    background: var(--c-teal-100);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--r-pill);
+    font-weight: 600;
+}
+.type-card-text { font-size: 0.95rem; color: var(--c-slate-600); line-height: 1.55; margin: 0; }
+
+/* Pathways */
+.pathways-card {
+    background: linear-gradient(135deg, var(--c-teal-50) 0%, #FFFFFF 100%);
+    border: 1px solid var(--c-teal-200);
+    border-radius: 14px;
+    padding: 1.75rem;
+    margin-top: 0.5rem;
+}
+.pathway-group { margin-bottom: 1.25rem; }
+.pathway-group:last-child { margin-bottom: 0; }
+.pathway-group-label {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--c-teal-700);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.625rem;
+}
+.pathway-pill {
+    display: inline-block;
+    background: white;
+    border: 1px solid var(--c-teal-200);
+    color: var(--c-teal-700);
+    padding: 0.4rem 0.875rem;
+    border-radius: var(--r-pill);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0.25rem 0.375rem 0.25rem 0;
+}
+.pathway-pill-secondary {
+    background: var(--c-slate-50);
+    border-color: var(--c-slate-200);
+    color: var(--c-slate-600);
+}
+
+/* Career families */
+.career-family {
+    background: var(--c-slate-50);
+    border-radius: var(--r-md);
+    padding: 1.125rem 1.25rem;
+    margin-bottom: 0.625rem;
+}
+.career-family-label { font-weight: 600; color: var(--c-ink); font-size: 0.9375rem; margin-bottom: 0.4rem; }
+.career-family-list { font-size: 0.9rem; color: var(--c-slate-600); }
+
+/* Profile summary */
+.profile-summary {
+    background: var(--c-slate-50);
+    border: 1px solid var(--c-slate-200);
+    border-radius: var(--r-md);
+    padding: 1.125rem 1.5rem;
+    margin: 1rem 0 2rem;
+    font-size: 0.95rem;
+    color: var(--c-slate-600);
+    line-height: 1.65;
+}
+.profile-summary strong { color: var(--c-ink); }
+
+
+/* ==========================================================================
+   7. COUNSELLOR CHAT PAGE
+   ========================================================================== */
+
+/* ---- Profile card ---- */
+.profile-card {
+    background: var(--grad-reveal);
+    color: white;
+    border-radius: var(--r-lg);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 16px 36px -16px rgba(15, 118, 110, 0.45);
+}
+.profile-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+.profile-card-greeting { font-size: 0.875rem; opacity: 0.85; font-weight: 500; }
+.profile-card-name { font-size: 1.5rem; font-weight: 700; margin: 0.2rem 0 0; letter-spacing: -0.015em; }
+.profile-card-code-block { text-align: right; flex-shrink: 0; }
+.profile-card-code-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.profile-card-code { font-size: 1.875rem; font-weight: 800; letter-spacing: 0.05em; line-height: 1.1; margin-top: 0.15rem; }
+.profile-card-meta {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 0.875rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-size: 0.875rem;
+    opacity: 0.92;
+    flex-wrap: wrap;
+}
+.profile-card-meta-item strong { font-weight: 600; }
+@media (max-width: 560px) {
+    .profile-card-top { flex-direction: column; }
+    .profile-card-code-block { text-align: left; }
+}
+
+/* ---- Status banner ---- */
+.status-banner {
+    background: #FEF3C7;
+    border-left: 3px solid #F59E0B;
+    color: #78350F;
+    padding: 0.875rem 1.125rem;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.status-banner strong { color: #78350F; }
+.status-banner code {
+    background: rgba(0,0,0,0.06);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* ---- Starter chips ----
+   Robust approach: wrap the chip buttons in <div class="starters-grid"> and
+   the buttons inside it are styled as chips — no JS class injection needed. ---- */
+.starters-wrap { margin: 0.5rem 0 1.5rem; }
+.starters-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--c-slate-500);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+.st-key-starters_grid div.stButton > button {
+    background: white !important;
+    border: 1px solid var(--c-slate-200) !important;
+    color: var(--c-slate-700) !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+    padding: 0.7rem 1rem !important;
+    border-radius: var(--r-md) !important;
+    text-align: left !important;
+    box-shadow: 0 2px 6px -3px rgba(15, 23, 42, 0.06) !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+    transition: border-color 0.15s ease, background 0.15s ease !important;
+}
+.st-key-starters_grid div.stButton > button:hover {
+    border-color: var(--c-teal-300) !important;
+    background: var(--c-teal-50) !important;
+}
+
+/* ---- Feedback row (thumbs up/down under AI replies) ---- */
+.feedback-row-wrap {
+    margin: -0.4rem 0 1.1rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.feedback-row-wrap div.stButton > button {
+    background: white !important;
+    border: 1px solid var(--c-slate-200) !important;
+    color: var(--c-slate-500) !important;
+    font-size: 0.875rem !important;
+    padding: 0.25rem 0.6rem !important;
+    border-radius: var(--r-sm) !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
+}
+.feedback-row-wrap div.stButton > button:hover {
+    background: var(--c-slate-50) !important;
+    border-color: var(--c-teal-500) !important;
+}
+.feedback-thanks { font-size: 0.8125rem; color: var(--c-teal-700); font-weight: 500; }
+
+/* ---- Empty state (no test taken yet) ---- */
+.empty-state { text-align: center; padding: 4rem 2rem; }
+.empty-state h1 { font-size: 1.75rem; font-weight: 800; margin: 1rem 0 0.75rem; color: var(--c-ink); }
+.empty-state p { color: var(--c-slate-500); font-size: 1rem; max-width: 460px; margin: 0 auto 1.5rem; }
+
+
+/* ==========================================================================
+   8. SHARED CHAT BUBBLES
+   Used by both the landing counsellor preview and the live chat page.
+   ========================================================================== */
+.chat-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+    align-items: flex-start;
+    animation: fadeIn 0.25s ease;
+}
+.chat-row.from-user { justify-content: flex-end; }
+.chat-avatar {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--grad-brand);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.9rem;
+}
+.chat-bubble {
+    max-width: 78%;
+    padding: 0.9rem 1.15rem;
+    border-radius: var(--r-lg);
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+.chat-bubble-user {
+    background: var(--c-teal-700);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+.chat-bubble-ai {
+    background: var(--c-slate-50);
+    color: var(--c-ink);
+    border: 1px solid var(--c-slate-200);
+    border-bottom-left-radius: 4px;
+}
+.chat-bubble-ai strong { color: var(--c-teal-700); }
+.chat-bubble p { margin: 0 0 0.5rem; }
+.chat-bubble p:last-child { margin-bottom: 0; }
+.chat-sources {
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--c-slate-300);
+    font-size: 0.825rem;
+    color: var(--c-slate-500);
+}
+.chat-sources-label { font-weight: 600; color: var(--c-slate-600); margin-right: 0.25rem; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+    .chat-bubble { max-width: 88%; }
+    .counsellor-features { gap: 0.5rem; }
+    .feature-pill { font-size: 0.78rem; padding: 0.3rem 0.7rem; }
+}

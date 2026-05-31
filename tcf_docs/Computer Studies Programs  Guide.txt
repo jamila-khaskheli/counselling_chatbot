@@ -1,0 +1,334 @@
+Computer
+studies
+
+fields offered
+
+1 Computer science
+2 Software engineering
+3 Information technology
+4 Artificial intelligence
+5 Cyber security
+
+BS-CS, 4 years
+Computer science
+This involves understanding the theoretical foundations of information
+and computation, as well as the practical aspects of implementing and
+applying these theories through software and hardware.
+
+You can pursue this field if you’re interested in programming, software
+development, and technology solutions.
+If you’re aiming for careers in software engineering, systems analysis,
+or IT consulting.
+or you’re passionate about innovation, coding, and problem-solving with
+technology.
+
+COURSE DETAILS
+
+Computer
+science
+Entry-Level Jobs: Junior
+Developer/Engineer,
+Technical Support
+Specialist, Data Analyst,
+Network Technician
+Mid-Level Jobs: Software
+Engineer, Security Analyst,
+Database Administrator,
+Project Manager.
+
+Introduction to Computer Science
+Programming Languages
+Data Structures and Algorithms
+Computer Architecture
+Operating Systems & Database Systems
+
+SPECIALIZATIONS
+Software Engineering
+Artificial Intelligence and Machine Learning
+Cybersecurity
+Data Science and Big Data
+Computer Graphics and Visualization,
+Networking, and Game Development.
+
+Computer science
+Computer Science graduates can work in various departments such as
+1.Software Development: Software Engineer, Application Developer, Systems
+Analyst.
+2. Data Science and Analytics: Data Scientist, Data Analyst, Business Intelligence
+Analyst.
+3.Cybersecurity: Security Analyst, Penetration Tester, Security Consultant.
+4. Networking: Network Administrator, Network Engineer, Systems
+Administrator.
+5.AI and Machine Learning: Machine Learning Engineer, AI Research Scientist,
+Data Engineer.
+6.Web and Mobile Development: Front-End Developer, Back-End Developer,
+Mobile App Developer.
+7.IT Consulting: IT Consultant, Technical Advisor, Systems Integration Specialist.
+
+Software Engineering is the
+discipline that applies engineering
+principles and practices to the
+design, development, maintenance,
+testing, and evaluation of software
+systems.
+
+If you're good at designing,
+developing, and optimizing software
+systems, you could thrive in
+software development, engineering,
+or IT project management.
+
+software
+engineering
+
+COURSE DETAILS
+
+software
+engineering
+Entry-Level Jobs: Junior
+Software Developer, QA
+Tester, Project
+Coordinator, DevOps
+Associate
+Mid-Level Jobs: Software
+Engineer, QA Engineer,
+Project Manager, DevOps
+Engineer.
+
+Introduction to Software Engineering
+Programming Languages (JAVA, C+, Python..)
+Data Structures and Algorithms
+Software Development Lifecycle (SDLC),
+Database Systems
+Software Testing and Quality Assurance
+Human-Computer Interaction (HCI).
+
+SPECIALIZATIONS
+Software Development
+Software Testing and Quality Assurance
+DevOps Engineering
+Cloud Computing
+Artificial Intelligence and Machine Learning
+Mobile Application Development
+Web Development.
+
+software engineering
+SE graduates can work in various departments such as:
+1. Software Development: Software Engineer, Application Developer, Systems
+Developer
+2. Software Testing and QA: QA Engineer, Test Analyst, Automation Tester.
+3. Project Management: Project Manager, Scrum Master, Agile Coach
+4. DevOps: DevOps Engineer, Release Manager, Continuous Integration Specialist
+5. Cloud Computing: Cloud Engineer, Cloud Solutions Architect, Cloud Consultant
+6. Cybersecurity: Security Engineer, Penetration Tester, Security Analyst
+7. AI and Machine Learning: Machine Learning Engineer, AI Specialist, Data
+Scientist
+8.Mobile and Web Development: Mobile Developer, Web Developer, FrontEnd/Back-End Developer.
+
+Information
+technology
+
+Information Technology (IT)
+involves the use of computers,
+networks, and other electronic
+devices to store, retrieve,
+transmit, and manipulate data.
+IT encompasses a wide range
+of activities including
+software development, system
+administration, network
+management, and IT support.
+
+information technology
+JOBS
+
+COURSES
+
+SPECIALIZATIONS
+Introduction to IT
+Computer Networks
+Database
+Management
+Systems (DBMS)
+Systems Analysis and
+Design
+Operating Systems
+Information Security
+Web Development
+
+Network
+Administration
+Database
+Administration
+Cloud Computing
+IT
+Project
+Management
+Systems Analysis
+Web Development
+
+Entry-Level: IT
+Support Specialist,
+Junior Network
+Administrator,
+Database Assistant
+Mid-Level: Systems
+Administrator, Network
+Engineer, Database
+Administrator.
+
+artificial
+intelligence
+Artificial Intelligence (AI) is the field of
+If you're interested in building
+
+computer science dedicated to
+
+smart systems, working with
+
+creating systems capable of
+
+machine learning, or analyzing
+
+performing tasks that typically
+
+data, this path is perfect for
+
+require human intelligence. These
+
+you! It’s great for students
+who want to pursue careers
+in AI, machine learning, or
+data science.
+
+tasks include learning, reasoning,
+problem-solving, perception, and
+language understanding.
+
+artificial inteligence
+COURSES
+
+JOBS AVAILABLE
+
+SPECIALIZATIONS
+1.Introduction to AI
+2.Machine Learning
+3.Deep Learning
+4.Natural Language
+Processing (NLP)
+5.Computer Vision
+6.Robotics
+7.AI Ethics.
+
+1.Machine Learning
+Engineer
+2.Data Scientist
+3.NLP Specialist
+4.Computer Vision
+Engineer
+5.Robotics Engineer
+
+Entry-Level: AI
+Research Assistant,
+Junior Data Scientist,
+Machine Learning
+Engineer.
+Mid-Level: AI Engineer,
+Senior Data Scientist,
+NLP Engineer.
+
+This involves protecting computer
+systems, networks, and data from
+digital attacks, theft, and damage. It
+includes a range of practices &
+technologies aimed at safeguarding
+information and ensuring the integrity,
+confidentiality, and availability of data.
+This is for you if you’re interested in
+protecting systems from cyber threats!
+It’s great for those aiming for careers
+in cybersecurity, ethical hacking, or
+information security, and if you’re
+passionate about keeping data safe and
+stopping cyber attacks.
+
+cybersecurity
+
+COURSE DETAILS
+
+cyber
+security
+Entry-Level: Security
+Analyst, Junior
+Penetration Tester, IT
+Security Specialist.
+Mid-Level: Security
+Engineer, Incident
+Response Specialist,
+Network Security
+Engineer.
+
+Introduction to Cybersecurity
+Network Security
+Cryptography
+Ethical Hacking
+Incident Response
+Cybersecurity Risk Management
+Security Policies and Procedures.
+
+SPECIALIZATIONS
+
+Network Security Specialist
+Security Analyst
+Ethical Hacker/Penetration Tester
+Incident Responder
+Cryptographer.
+
+BUSINESS/DATA
+ANALYTICS
+
+Information Technology (IT)
+involves the use of computers,
+networks, and other electronic
+devices to store, retrieve,
+transmit, and manipulate data.
+IT encompasses a wide range
+of activities including
+software development, system
+administration, network
+management, and IT support.
+
+University websites
+
+Check the computer science
+program curriculum of reputable
+universities in Pakistan to
+understand the courses offered
+in different specializations.
+
+Read online
+
+Read about recent tech events
+and read industry related
+content to stay updated on
+current trends and job
+opportunities.
+
+How to research
+Further:
+
+Free videos on youtube
+
+Watch videos on youtube about
+courses related to specific
+areas of computer science to
+explore your interests further.
+
+Homework
+Research the subjects taught in
+your chosen field to see if they
+match your interests.
+
+Thank You!
+
+

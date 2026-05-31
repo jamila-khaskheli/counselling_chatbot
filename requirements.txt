@@ -1,0 +1,32 @@
+streamlit
+pandas
+matplotlib
+
+# RAG stack
+langchain
+langchain-community
+langchain-openai
+langchain-huggingface
+chromadb
+sentence-transformers
+openai
+torchvision
+langchain-chroma
+langchain_core
+
+# Document loaders
+pypdf
+docx2txt
+chardet
+TextLoader
+openpyxl
+
+# Database
+supabase
+
+#Others
+langchain_huggingface
+langchain_openai
+langchain_text_splitters
+langchain_chroma
+langchain_community

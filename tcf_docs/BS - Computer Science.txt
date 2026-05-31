@@ -1,0 +1,126 @@
+Computer Science ×
+
+4 years
+8 semesters
+
+What is CS?
+Computer Science (CS) is a 4 year degree that includes computing
+systems, algorithms, software, and data processing.
+It involves designing, developing, and maintaining software
+applications, analyzing data, creating algorithms, and solving complex
+computational problems using technology. The field also encompasses
+artificial intelligence (AI), machine learning, data science,
+cybersecurity.
+
+Why Pursue Computer Science?
+
+High Demand: With the rise of technology, there is an increasing demand
+for computer science professionals in Pakistan, especially in software
+development, IT services, cybersecurity, and data analysis.
+Growing Tech Industry: Pakistan's IT industry is expanding, with a high
+demand for skilled professionals in both local and international markets.
+Global Opportunities: Computer science skills are recognized worldwide,
+and Pakistan’s growing IT exports open doors for global employment
+opportunities.
+Innovation and Future Impact: With advancements in AI, blockchain, and
+IoT (Internet of Things), computer scientists play an essential role in
+driving technological change and innovation.
+
+Course Outline
+Mathematics (Algebra & Calculus)
+Computer Graphics
+Discrete Mathematics
+Theory of Computation
+Computer Organization
+Cloud Computing
+Data Structures
+Data Mining
+Introduction to Web Development
+Business Intelligence
+Database Management Systems (DBMS)
+Big Data
+Human-Computer Interaction
+Internet of Things (IoT)
+Computer Networks
+Algorithms
+Mobile App Development
+For a sample of the program curriculum,
+Object-Oriented Programming
+visit the following link:
+SZABIST- BSCS Curriculum
+Data Science
+
+Organizations/Companies that hire CS Graduates
+
+Software Houses
+10Pearls
+Systems Limited
+Techlogix
+NetSol Technologies
+Confiz
+
+Multinationals
+Microsoft Pakistan
+Oracle
+IBM Pakistan
+Telenor Pakistan
+SAP Pakistan
+
+Organizations/Companies that hire CS Graduates
+
+Telecommunications
+Zong
+Ptcl
+Jazz (Mobilink)
+
+Tech startups
+Careem
+Bykea
+Foodpanda
+
+Potential Career Opportunities
+
+Software Developer
+Data Scientist
+Cybersecurity Expert
+AI Engineer/Researcher
+Web developer
+
+Mobile App Developer
+Cloud Solutions
+Architect
+System Administrator
+Game developer
+
+Key Areas of Study
+
+Artificial Intelligence (AI):
+Designing intelligent systems
+that simulate human behavior,
+including machine learning
+and natural language
+processing.
+
+Learning various
+programming
+languages such as
+Python, Java, C++,
+and more to build
+software and
+applications.
+
+After completing BSCS, you can pursue various
+job roles, including:
+Software Developer
+Data Scientist
+Web Developer
+Mobile App Developer
+Network Engineer
+IT Consultant
+Game Developer
+Cybersecurity Analyst
+Machine Learning Engineer
+Systems Analyst
+Database Administrator
+
+
