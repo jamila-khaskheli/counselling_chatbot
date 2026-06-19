@@ -378,7 +378,7 @@ def render_step_results():
                         <span class="type-card-name">{desc['title']}</span>
                         <span class="type-card-score">{score}</span>
                     </div>
-                    <p class="type-card-text"><strong>{desc['title']}</strong> {desc['desc_first_person']}</p>
+                    <p class="type-card-text">{desc['desc_first_person']}</p>
                 </div>
             </div>
             """,
@@ -387,7 +387,8 @@ def render_step_results():
 
     # ---- Background-aware pathways -----------------------------------------
     st.markdown(
-        '<h2 class="result-section-title">Recommended pathways for your background</h2>',
+        '<h4>Want to continue in the same field you studied in Intermediate?</h4>'
+        '<h2 class="result-section-title">Recommended Study Pathways for You</h2>',
         unsafe_allow_html=True,
     )
 
@@ -502,7 +503,7 @@ def render_step_results():
         )
     # ---- Career families ----------------------------------------------------
     st.markdown(
-        f'<h2 class="result-section-title">Based on your results, you might explore...</h2>',
+        f'<h2 class="result-section-title">Based on your interests and strengths, you might explore...</h2>',
         unsafe_allow_html=True,
     )
     for code in holland_letters:
@@ -517,6 +518,12 @@ def render_step_results():
             """,
             unsafe_allow_html=True,
         )
+    st.markdown(f"""
+        <div>
+            <p><strong>Remember:</strong> These are suggestions to help you explore your options. 
+                You can succeed in many different fields with hard work and interest.</p>
+        </div>
+        """, unsafe_allow_html=True,)
 
     # ---- Actions ------------------------------------------------------------
     st.markdown('<div style="height: 2rem;"></div>', unsafe_allow_html=True)
