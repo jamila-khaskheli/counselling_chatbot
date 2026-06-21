@@ -23,7 +23,7 @@ CHUNK_OVERLAP = 100
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # MUST match the chat page
 
 DISPLAY_NAMES = {}
-UNIVERSITY_XLSX = "tcf_docs/tsp_university_list.xlsx"  # adjust to your path
+UNIVERSITY_XLSX = "tcf_docs/university list.xlsx"  # adjust to your path
 UNIVERSITY_SHEET = "list"
 
 #Custom Funstions
