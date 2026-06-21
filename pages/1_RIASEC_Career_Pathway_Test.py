@@ -519,16 +519,39 @@ def render_step_results():
             unsafe_allow_html=True,
         )
     st.markdown(f"""
-        <div>
-            <p><strong>Remember:</strong> These are suggestions to help you explore your options. 
-                You can succeed in many different fields with hard work and interest.</p>
+        <div class="career-family">
+            <div class="type-card-body">
+                <div class="type-card-head">
+                    <span class="type-card-name">Congratulations!!</span>
+                </div>
+                <p class="type-card-text">You have completed your personality assessment. This is your starting point; not your finishing point. It is designed to give you a clear overview of the fields available to you and the programs you can study.</p>
+            </div>
+        </div>
+        <div class="type-card">
+            <div class="type-card-body">
+                <div class="type-card-head">
+                    <span class="type-card-name">STEP 1 — Start here</span>
+                </div>
+                <p class="type-card-text"><strong>Ask yourself:</strong> Does this feel like something I could see myself doing?</p>
+            </div>
+            <div class="type-card-body">
+                <div class="type-card-head">
+                    <span class="type-card-name">STEP 2 — Go deeper with university websites</span>
+                </div>
+                <p class="type-card-text">Once you have a shortlist of fields, visit the official websites of the universities listed under 'Universities on Policy'. Read about their specific programs, and admission requirements.</p>
+            </div>            
+            <div class="type-card-body">
+                <div class="type-card-head">
+                    <span class="type-card-name">STEP 3 — Talk to AI Counsellor</span>
+                </div>
+                <p class="type-card-text">Use AI Counsellor to ask follow-up questions and explore further. It can help explain concepts in simple language</p>
         </div>
         """, unsafe_allow_html=True,)
 
     # ---- Actions ------------------------------------------------------------
     st.markdown('<div style="height: 2rem;"></div>', unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1, 1, 1.4])
+    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
     with col1:
         if st.button("← Review my answers", width="stretch"):
             st.session_state.wizard_step = 1
@@ -544,6 +567,9 @@ def render_step_results():
                     del st.session_state[k]
             st.rerun()
     with col3:
+        if st.button("Universities on Policy →", type="primary", width="stretch"):
+            st.switch_page("pages/3_Universities_on_Policy.py")
+    with col4:
         if st.button("Talk to AI counsellor →", type="primary", width="stretch"):
             st.switch_page("pages/2_Career_Counsellor_Chat.py")
 
